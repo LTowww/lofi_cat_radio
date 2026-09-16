@@ -170,6 +170,52 @@
             }
         }
 
+        .lofi-volume {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lofi-volume svg {
+            width: 14px;
+            height: 14px;
+            fill: #2de2ff;
+            flex-shrink: 0;
+        }
+
+        
+        .lofi-volume input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 70px;
+            height: 4px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #ff2fd0, #2de2ff);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .lofi-volume input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 6px rgba(45, 226, 255, 0.9);
+            cursor: pointer;
+        }
+
+        .lofi-volume input[type="range"]::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: #fff;
+            box-shadow: 0 0 6px rgba(45, 226, 255, 0.9);
+            cursor: pointer;
+        }
+
         .coffee-btn {
             position: fixed;
             bottom: 20px;
@@ -397,6 +443,10 @@
                 display: none;
             }
 
+            .lofi-volume input[type="range"] {
+                width: 46px;
+            }
+
             footer {
                 padding-bottom: 92px;
             }
@@ -436,6 +486,11 @@
             <div class="lofi-bars">
                 <span></span><span></span><span></span><span></span>
             </div>
+        </div>
+
+        <div class="lofi-volume">
+            <svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"/></svg>
+            <input type="range" id="lofi-volume" min="0" max="1" step="0.01" value="0.7" aria-label="Volume">
         </div>
     </div>
 
@@ -566,6 +621,13 @@
                 iconPlay.style.display = 'block';
                 iconPause.style.display = 'none';
             }
+        });
+
+        
+        const volumeSlider = document.getElementById('lofi-volume');
+        audio.volume = volumeSlider.value;
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value;
         });
     </script>
 </body>
